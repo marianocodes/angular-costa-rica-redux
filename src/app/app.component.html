@@ -1,20 +1,56 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-toolbar layout-align="center center" color="primary">
+  <h1>SuperMarket</h1>
+  <span class="spacer"></span>
+  <div>
+    Products
 
+    <mat-icon>shopping_cart</mat-icon>:
+    {{ (list$ | async)?.length }}
+  </div>
+</mat-toolbar>
+
+<div class="container" fxLayoutAlign="center">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex="70%">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="80%">
+        <!-- PRODUCTS -->
+        <mat-card class="cards">
+          <mat-card-header>
+            <mat-card-title>
+              <h2>Products</h2>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div fxLayoutAlign="center">
+              <app-products (selected)="addProduct($event)"></app-products>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="80%">
+
+        <!-- List -->
+        <mat-card class="cards">
+          <mat-card-header>
+            <mat-card-title>
+              <div fxLayout="row" fxLayoutAlign="space-between">
+                <h2>List</h2>
+                <mat-form-field>
+                  Remove products
+                  <input matInput #term type="text" (keydown.enter)="filterList(term.value); term.value=''"/>
+                </mat-form-field>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-list [data]="list$ | async" (remove)="removeProduct($event)"></app-list>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>
