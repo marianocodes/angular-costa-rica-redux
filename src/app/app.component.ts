@@ -18,13 +18,14 @@ export class AppComponent {
   }
 
   public addProduct(product: string) {
-    this.store.dispatch(new AddProduct(product));
+    this.store.dispatch(AddProduct(product));
   }
 
   public removeProduct(position: number) {
-    this.store.dispatch(new RemoveProduct(position));
+    this.store.dispatch(RemoveProduct(position));
   }
 
+  // TODO: Create filter function
 }
 
 
@@ -57,6 +58,7 @@ export class AppComponent {
 
 
 // Solution
+// import { RemoveProduct, AddProduct, FilterCart } from './state/actions/cart.actions';
 // public filterList(product: string) {
-//   this.store.dispatch(new FilterCart(product));
+//   this.store.dispatch(FilterCart(product));
 // }

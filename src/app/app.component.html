@@ -40,6 +40,7 @@
                 <h2>List</h2>
                 <mat-form-field>
                   Remove products
+                  <!-- TODO: Implement filter list -->
                   <input matInput #term type="text" (keydown.enter)="filterList(term.value); term.value=''"/>
                 </mat-form-field>
               </div>

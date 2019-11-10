@@ -1,24 +1,33 @@
-import { Action } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
-export enum CartActionTypes {
-  AddProduct = '[Cart] AddProduct Product',
-  RemoveProduct = '[Cart] Remove Product',
-  FilterCart = '[Cart] Filter Product',
-}
+export const AddProduct = createAction('[Cart] AddProduct Product', (payload: string) => ({ payload }));
+export const RemoveProduct = createAction('[Cart] Remove Product', (payload: number) => ({ payload }));
+ // TODO: Create filter action
 
-export class AddProduct implements Action {
-  readonly type = CartActionTypes.AddProduct;
-  constructor(public payload: string) {}
-}
+// OLD WAY
 
-export class RemoveProduct implements Action {
-  readonly type = CartActionTypes.RemoveProduct;
-  constructor(public payload: number) {}
-}
+// export enum CartActionTypes {
+//   AddProduct = '[Cart] AddProduct Product',
+//   RemoveProduct = '[Cart] Remove Product',
+//   FilterCart = '[Cart] Filter Product',
+// }
 
-export type CartActions = AddProduct | RemoveProduct;
+// export class AddProduct implements Action {
+//   readonly type = CartActionTypes.AddProduct;
+//   constructor(public payload: string) {}
+// }
 
+// export class RemoveProduct implements Action {
+//   readonly type = CartActionTypes.RemoveProduct;
+//   constructor(public payload: number) {}
+// }
 
+// export class FilterCart implements Action {
+//   readonly type = CartActionTypes.FilterCart;
+//   constructor(public payload: string) {}
+// }
+
+// export type CartActions = AddProduct | RemoveProduct | FilterCart;
 
 
 
@@ -53,10 +62,4 @@ export type CartActions = AddProduct | RemoveProduct;
 
 
 // Solution:
-// export class FilterCart implements Action {
-//   readonly type = CartActionTypes.FilterCart;
-//   constructor(public payload: string) {}
-// }
-
-// export type CartActions = AddProduct | RemoveProduct | FilterCart;
-
+// export const FilterCart = createAction('[Cart] Filter Product', (payload: string) => ({ payload }));
