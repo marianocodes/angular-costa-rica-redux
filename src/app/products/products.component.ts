@@ -1,13 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-const data = [
-  '🍎',
-  '🍐',
-  '🧀',
-  '🍕',
-  '🍬',
-  '🥜',
-];
+
 
 @Component({
   selector: 'app-products',
@@ -16,7 +9,8 @@ const data = [
 })
 export class ProductsComponent implements OnInit {
 
-  public products = data;
+  @Input()
+  public data: string[];
 
   @Output()
   public selected = new EventEmitter();

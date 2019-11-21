@@ -2,6 +2,11 @@ import { createAction } from '@ngrx/store';
 
 export const AddProduct = createAction('[Cart] AddProduct Product', (payload: string) => ({ payload }));
 export const RemoveProduct = createAction('[Cart] Remove Product', (payload: number) => ({ payload }));
+export const FilterCart = createAction('[Cart] Filter Product', (payload: string) => ({ payload }));
+
+export const GetList = createAction('[Cart] Product List');
+export const GetListSuccess = createAction('[Cart] Product List Success', (payload: string[]) => ({ payload }));
+export const GetListFail = createAction('[Cart] Product List Fail', (payload: string) => ({ payload }));
  // TODO: Create filter action
 
 // OLD WAY

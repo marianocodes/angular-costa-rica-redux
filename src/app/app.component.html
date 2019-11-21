@@ -22,7 +22,7 @@
           </mat-card-header>
           <mat-card-content>
             <div fxLayoutAlign="center">
-              <app-products (selected)="addProduct($event)"></app-products>
+              <app-products [data]="items$ | async"  (selected)="addProduct($event)"></app-products>
             </div>
           </mat-card-content>
         </mat-card>

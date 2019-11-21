@@ -3,18 +3,25 @@ import * as CartActions from '../actions/cart.actions';
 
 export interface State {
   list: string[];
+  items: string[];
 }
 
 export const initialState: State = {
-  list: []
+  list: [],
+  items: [],
 };
 
 const cartReducer = createReducer(
   initialState,
-  on(CartActions.AddProduct, (state, action) => ({ list: [ ...state.list, action.payload ] })),
+  on(CartActions.AddProduct, (state, action) => ({ ...state, list: [ ...state.list, action.payload ] })),
 
   on(CartActions.RemoveProduct,
-    (state, action) => ({ list: [ ...state.list.slice(0, action.payload), ...state.list.slice(action.payload + 1)] })),
+    (state, action) => ({ ...state, list: [ ...state.list.slice(0, action.payload), ...state.list.slice(action.payload + 1)] })),
+
+  on(CartActions.FilterCart, (state, action) => ({ ...state, list: [ ...state.list.filter((value) => value !== action.payload)] })),
+
+  on(CartActions.GetListSuccess,
+      (state, action) => ({ ...state, items: [ ...action.payload ] })),
   // TODO: reducer to filter data
 );
 
@@ -77,4 +84,6 @@ export function reducer(state: State | undefined, action: Action) {
 
 
 // Solution:
-// on(CartActions.FilterCart, (state, action) => ({ list: [ ...state.list.filter((value) => value !== action.payload)] }))
+
+  // on(CartActions.GetListSuccess,
+  //   (state, action) => ({ ...state, items: [ ...action.payload ] })),

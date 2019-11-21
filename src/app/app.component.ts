@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { State, selectList } from './state/reducers';
-import { RemoveProduct, AddProduct } from './state/actions/cart.actions';
+import { State, selectList, selectItems } from './state/reducers';
+import { RemoveProduct, AddProduct, GetList, FilterCart } from './state/actions/cart.actions';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   public list$: Observable<string[]>;
+  public items$: Observable<string[]>;
 
-  constructor(public store: Store<State>) {
-    this.list$ = store.pipe(select(selectList));
+  constructor(
+    public store: Store<State>,
+    public service: AppService
+  ) {
+    this.list$ = store.pipe(select(selectList));    
+    this.items$ = store.pipe(select(selectItems));   
+  }
+
+  public ngOnInit() {   
+    this.store.dispatch(GetList());
   }
 
   public addProduct(product: string) {
@@ -24,6 +34,11 @@ export class AppComponent {
   public removeProduct(position: number) {
     this.store.dispatch(RemoveProduct(position));
   }
+
+  public filterList(product: string) {
+    this.store.dispatch(FilterCart(product));
+  }
+
 
   // TODO: Create filter function
 }
@@ -62,3 +77,9 @@ export class AppComponent {
 // public filterList(product: string) {
 //   this.store.dispatch(FilterCart(product));
 // }
+
+
+// public ngOnInit() {
+//   this.store.dispatch(GetList())
+// }
+// this.items$ = store.pipe(select(selectItems));
