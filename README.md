@@ -7,4 +7,4 @@ This project intends to explain how the redux pattern works with NgRx.
 1. Run `npm i`
 2. Run `npm start` to init the local server
 
-Slides: 
+Slides: https://speakerdeck.com/mahcr/redux-ngrx-v8
